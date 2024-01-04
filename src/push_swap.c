@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2023/12/30 21:50:55 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:57:00 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static long	*ft_nbr_split(char *str)
 int	main(int argc, char **argv)
 {
 	long	*numbers;
+	t_list	*a;
 
 	numbers = NULL;
 	if (argc < 2)
@@ -105,5 +106,10 @@ int	main(int argc, char **argv)
 	if (!numbers)
 		write(1, "Error\n", 6);
 	else
-		init_stacks(numbers);
+		a = init_stack(numbers);
+	if (a)
+	{
+		print_list(a);
+		free_list(a);
+	}
 }

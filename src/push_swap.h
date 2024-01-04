@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2023/12/30 21:39:31 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:55:15 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,23 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
+typedef struct s_list
+{
+	int				value;
+	size_t			relative_value;
+	size_t			size;
+	struct s_list	*next;
+	struct s_list	*prev;
+	struct s_list	*first;
+}	t_list;
+
 char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	array_len(char **array);
 size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
-void	init_stacks(long *numbers);
+t_list	*init_stack(long *numbers);
+void	print_list(t_list *list);
+void	free_list(t_list *list);
 
 #endif
