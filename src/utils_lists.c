@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/04 16:36:14 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/05 23:19:37 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,39 @@
 
 void	print_list(t_list *list)
 {
-	size_t	i;
+	t_list	*first;
 
-	i = 0;
-	while (i++ < list->size)
+	if (list)
+		first = list;
+	else
+		return ;
+	printf("value: %d\tr_v: %ld\n", list->value, list->r_v);
+	list = list->next;
+	while (list && list != first)
 	{
-		printf("value: %d relative_value: %ld size: %ld\n", list->value,
-			list->relative_value, list->size);
+		printf("value: %d\tr_v: %ld\n", list->value, list->r_v);
+		list = list->next;
+		sleep(1);
+	}
+}
+
+size_t	count_list(t_list *list)
+{
+	t_list	*first;
+	size_t	size;
+
+	if (list)
+		first = list;
+	else
+		return (0);
+	size = 1;
+	list = list->next;
+	while (list && list != first)
+	{
+		size++;
 		list = list->next;
 	}
+	return (size);
 }
 
 void	free_list(t_list *list)
@@ -32,8 +56,8 @@ void	free_list(t_list *list)
 	t_list	*temp_list;
 
 	i = 0;
-	size = list->size;
-	while (i++ < size)
+	size = count_list(list);
+	while (list && i++ < size)
 	{
 		temp_list = list;
 		list = list->next;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:24:03 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/04 16:57:01 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/05 19:34:31 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static t_list	*relative_value(int index, long *numbers, t_list *node)
 	while (++i <= numbers[0])
 		if (numbers[i] < numbers[index])
 			relative_value++;
-	node->relative_value = relative_value;
-	node->size = i - 1;
+	node->r_v = relative_value;
 	return (node);
 }
 
@@ -58,7 +57,8 @@ t_list	*init_stack(long *numbers)
 	i = 0;
 	while (++i <= numbers[0])
 		a = new_node(i, numbers, a);
-	a->next = a->first;
+	if (a->first != a)
+		a->next = a->first;
 	(a->first)->prev = a;
 	a = a->first;
 	free(numbers);

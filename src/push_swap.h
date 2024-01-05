@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/05 17:26:58 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/05 22:10:01 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 typedef struct s_list
 {
 	int				value;
-	size_t			relative_value;
-	size_t			size;
+	size_t			r_v;
 	struct s_list	*next;
 	struct s_list	*prev;
 	struct s_list	*first;
@@ -38,6 +37,10 @@ long	ft_atoi(char *nptr);
 t_list	*init_stack(long *numbers);
 t_list	*sort_list(t_list *a);
 void	print_list(t_list *list);
+size_t	count_list(t_list *list);
 void	free_list(t_list *list);
+t_list	*op_swap(t_list *list, char op);
+t_list	*op_rotate(t_list *list, char op);
+t_list	*op_push_b(t_list *a, t_list **b);
 
 #endif

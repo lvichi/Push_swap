@@ -11,7 +11,7 @@ else if a1 > a2 && a1 != max -> SA
 
 else if b1 < b2 && b2 != (half - 1) -> SB
 
-if a1 < half -> RB
+if a1 < half -> PB
 
 else -> RA
 }
