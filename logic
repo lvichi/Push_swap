@@ -1,0 +1,46 @@
+if size %2 == 0
+	size /2 = half
+else
+	size /2 + 1 = half
+
+push b half times
+{
+if a1 > a2 && a1 != max && b1 < b2 && b2 != (half - 1) -> SS
+
+else if a1 > a2 && a1 != max -> SA
+
+else if b1 < b2 && b2 != (half - 1) -> SB
+
+if a1 < half -> RB
+
+else -> RA
+}
+
+half element on top of A && (half - 1) element on top of B
+{
+if a1 > a2 && a1 != max && b1 < b2 && b2 != (half - 1) -> SS
+
+else if a1 > a2 && a1 != max -> SA
+
+else if b1 < b2 && b2 != (half - 1) -> SB
+
+if a1 != half && b1 != (half - 1) -> RR
+
+else if a1 != half -> RA
+
+else if b1 != (half - 1) -> RB
+}
+
+half times
+{
+if a1 > a2 && a1 != max && b1 < b2 && b2 != (half - 1) -> SS
+
+else if a1 > a2 && a1 != max -> SA
+
+else if b1 < b2 && b2 != (half - 1) -> SB
+
+push a
+}
+
+check sort
+

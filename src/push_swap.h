@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/04 16:55:15 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/05 17:26:58 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ size_t	array_len(char **array);
 size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
 t_list	*init_stack(long *numbers);
+t_list	*sort_list(t_list *a);
 void	print_list(t_list *list);
 void	free_list(t_list *list);
 

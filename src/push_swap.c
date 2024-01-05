@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/04 16:57:00 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/05 17:35:43 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char **argv)
 	long	*numbers;
 	t_list	*a;
 
-	numbers = NULL;
+	a = NULL;
 	if (argc < 2)
 		exit (0);
 	else if (argc == 2)
@@ -109,6 +109,9 @@ int	main(int argc, char **argv)
 		a = init_stack(numbers);
 	if (a)
 	{
+		print_list(a);
+		a = sort_list(a);
+		write(1, "\n", 1);
 		print_list(a);
 		free_list(a);
 	}
