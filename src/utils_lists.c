@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/05 23:19:37 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/06 20:28:02 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,22 @@ void	print_list(t_list *list)
 		first = list;
 	else
 		return ;
-	printf("value: %d\tr_v: %ld\n", list->value, list->r_v);
+	printf("value: %d\tr_v: %ld\t", list->value, list->r_v);
+	if (list->next)
+		printf("next: %ld\tprev: %ld\n", (list->next)->r_v, (list->prev)->r_v);
+	else
+		printf("\n");
 	list = list->next;
 	while (list && list != first)
 	{
-		printf("value: %d\tr_v: %ld\n", list->value, list->r_v);
+		printf("value: %d\tr_v: %ld\t", list->value, list->r_v);
+		if (list->next)
+			printf("next: %ld\tprev: %ld\n", (list->next)->r_v,
+				(list->prev)->r_v);
+		else
+			printf("\n");
+		usleep(100000);
 		list = list->next;
-		sleep(1);
 	}
 }
 

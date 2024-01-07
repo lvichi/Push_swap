@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:56:42 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/05 23:25:10 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/07 00:22:15 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,71 +16,97 @@ t_list	*op_swap(t_list *list, char op)
 {
 	t_list	*temp_node;
 
-	if (!list || !list->next)
+	if (!list || list->next == list)
 		return (list);
 	else if (op == 'a')
 		write(1, "sa\n", 3);
 	else if (op == 'b')
 		write(1, "sb\n", 3);
-	else
-		return (list);
 	temp_node = list;
 	list = list->next;
-	(temp_node->prev)->next = list;
-	list->prev = temp_node->prev;
-	temp_node->next = list->next;
-	list->next = temp_node;
+	if (list->next != temp_node)
+	{
+		temp_node->next = list->next;
+		(list->next)->prev = temp_node;
+		list->next = temp_node;
+		list->prev = temp_node->prev;
+		(temp_node->prev)->next = list;
+		temp_node->prev = list;
+	}
 	return (list);
 }
 
-t_list	*op_rotate(t_list *list, char op)
+void	op_rotate(t_list **a, t_list **b, char *op)
 {
-	if (!list || !list->next)
-		return (list);
-	if (op == 'a')
-		write(1, "ra\n", 3);
-	else if (op == 'b')
-		write(1, "rb\n", 3);
+	if (!ft_strcmp("ra", op))
+		*a = (*a)->next;
+	else if (!ft_strcmp("rb", op))
+		*b = (*b)->next;
+	else if (!ft_strcmp("rra", op))
+		*a = (*a)->prev;
+	else if (!ft_strcmp("rrb", op))
+		*b = (*b)->prev;
+	else if (!ft_strcmp("rr", op))
+	{
+		*a = (*a)->next;
+		*b = (*b)->next;
+	}
+	else if (!ft_strcmp("rrr", op))
+	{
+		*a = (*a)->prev;
+		*b = (*b)->prev;
+	}
 	else
-		return (list);
-	return (list->next);
+		return ;
+	write(1, op, str_len(op));
+	write(1, "\n", 1);
 }
 
-t_list	*op_push_b(t_list *a, t_list **b)
+static void	op_push_src(t_list **temp_node, t_list **src, t_list **dest)
+{
+	*temp_node = *src;
+	if ((*src)->next != *src)
+		*src = (*src)->next;
+	else
+		*src = NULL;
+	if (*src)
+	{
+		(*src)->prev = (*temp_node)->prev;
+		((*temp_node)->prev)->next = *src;
+	}
+	if (!*dest)
+	{
+		*dest = *temp_node;
+		(*dest)->next = *dest;
+		(*dest)->prev = *dest;
+	}
+}
+
+void	op_push(t_list **src, t_list **dest, char op)
 {
 	t_list	*temp_node;
-	
-	if (!a)
-		return (a);
-	if (!*b)
+
+	if (!*src)
+		return ;
+	op_push_src(&temp_node, src, dest);
+	if (*dest != temp_node)
 	{
-		*b = a;
-		a = a->next;
-		if (a)
-			(a->prev)->next = a;
-		(*b)->next = NULL;
-		(*b)->prev = NULL;
-		write(1, "pb\n", 3);
-		return (a);
+		temp_node->next = *dest;
+		if ((*dest)->prev)
+		{
+			temp_node->prev = (*dest)->prev;
+			((*dest)->prev)->next = temp_node;
+		}
+		else
+		{
+			temp_node->prev = *dest;
+			(*dest)->next = temp_node;
+		}
+		(*dest)->prev = temp_node;
+		*dest = temp_node;
 	}
-	temp_node = a;
-	a = a->next;
-	if (a)
-	{
-		printf("((a->prev)->next)->r_v: %ld\n", ((a->prev)->next)->r_v);
-		(a->prev)->next = a;
-	}
-	if ((*b)->next)
-	{
-		temp_node->prev = (*b)->prev;
-		((*b)->prev)->next = temp_node;
-	}
+	if (op == 'a')
+		write(1, "pa\n", 3);
 	else
-	{
-		(*b)->next = temp_node;
-		(*b)->prev = temp_node;
-	}
-	temp_node->next = *b;
-	write(1, "pb\n", 3);
-	return (a);
+		write(1, "pb\n", 3);
 }

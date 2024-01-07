@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/05 23:21:21 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/07 00:22:22 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,42 @@ t_list	*sort_list(t_list *a)
 		printf("pb_count: %lu/n", pb_count); //delete
 	}*/
 	a = op_swap(a, 'a');
-	//print_list(a);
-	printf("\n");
-	
-	a = op_rotate(a, 'a');
-	//print_list(a);
-	printf("\n");
-
-	a = op_push_b(a, &b);
+	printf("\nSTACK A:\n");
 	print_list(a);
-	printf("\n");
-	print_list(b);
-	printf("\n");
-
-	a = op_push_b(a, &b);
-	sleep(3);
-	print_list(b);
-	printf("\n");
-	sleep(3);
-	print_list(a);
-	printf("\n");
 	
+	op_rotate(&a, &b, "rra");
+	printf("\nSTACK A:\n");
+	print_list(a);
+
+	int i = -1;
+	while (i++ < (int)half)
+	{
+		op_push(&a, &b, 'b');
+		printf("\nSTACK A:\n");
+		print_list(a);
+		printf("\nSTACK B:\n");
+		print_list(b);
+	}
+
+	b = op_swap(b, 'b');
+	printf("\nSTACK B:\n");
+	print_list(b);
+	
+	op_rotate(&a, &b, "rr");
+	printf("\nSTACK B:\n");
+	print_list(b);
+	printf("\nSTACK A:\n");
+	print_list(a);
+
+	i = -1;
+	while (i++ < (int)half)
+	{
+		op_push(&b, &a, 'a');
+		printf("\nSTACK A:\n");
+		print_list(a);
+		printf("\nSTACK B:\n");
+		print_list(b);
+	}
 	free_list(b);
 	return (a);
 }

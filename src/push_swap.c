@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/05 19:10:44 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/06 20:11:56 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 	{
 		print_list(a);
 		a = sort_list(a);
-		print_list(a);
+		//print_list(a);
 		free_list(a);
 	}
 }
