@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/07 00:22:22 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:37:39 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,42 @@ t_list	*sort_list(t_list *a)
 			op_rotate(a, b, 'a');  //need to be created
 		printf("pb_count: %lu/n", pb_count); //delete
 	}*/
-	a = op_swap(a, 'a');
-	printf("\nSTACK A:\n");
-	print_list(a);
 	
-	op_rotate(&a, &b, "rra");
-	printf("\nSTACK A:\n");
-	print_list(a);
+	print_lists(a, b);
+	
+	op_list(&a, &b, "sa");
+	print_lists(a, b);
+	
+	op_list(&a, &b, "rra");
+	print_lists(a, b);
 
 	int i = -1;
-	while (i++ < (int)half)
+	while (i++ < 15)
 	{
-		op_push(&a, &b, 'b');
-		printf("\nSTACK A:\n");
-		print_list(a);
-		printf("\nSTACK B:\n");
-		print_list(b);
+		op_list(&a, &b, "pb");
+		print_lists(a, b);
 	}
 
-	b = op_swap(b, 'b');
-	printf("\nSTACK B:\n");
-	print_list(b);
+	op_list(&a, &b, "sb");
+	print_lists(a, b);
+
+	op_list(&a, &b, "ss");
+	print_lists(a, b);
 	
-	op_rotate(&a, &b, "rr");
-	printf("\nSTACK B:\n");
-	print_list(b);
-	printf("\nSTACK A:\n");
-	print_list(a);
+	op_list(&a, &b, "rr");
+	print_lists(a, b);
 
 	i = -1;
-	while (i++ < (int)half)
+	while (i++ < 15)
 	{
-		op_push(&b, &a, 'a');
-		printf("\nSTACK A:\n");
-		print_list(a);
-		printf("\nSTACK B:\n");
-		print_list(b);
+		op_list(&a, &b, "pa");
+		print_lists(a, b);
 	}
 	free_list(b);
 	return (a);
 }
+
+	/*printf("\nSTACK A:\n");
+	print_list(a);
+	printf("\nSTACK B:\n");
+	print_list(b);*/
