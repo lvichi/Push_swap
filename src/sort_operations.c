@@ -6,11 +6,13 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:56:42 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 18:43:57 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:05:07 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	moves = 0;
 
 static void	op_swap(t_list **list, char *op);
 static void	op_rotate(t_list **a, t_list **b, char *op);
@@ -26,6 +28,7 @@ void	op_list(t_list **a, t_list **b, char *op)
 	{
 		write(1, op, 2);
 		write(1, "\n", 1);
+		moves++;//				DELETE
 	}
 	if ((!ft_strcmp("ra", op) || !ft_strcmp("rra", op)) && *a)
 		op_rotate(a, b, op);
@@ -60,6 +63,7 @@ static void	op_swap(t_list **list, char *op)
 	{
 		write(1, op, 2);
 		write(1, "\n", 1);
+		moves++;//				DELETE
 	}
 }
 
@@ -87,6 +91,7 @@ static void	op_rotate(t_list **a, t_list **b, char *op)
 		return ;
 	write(1, op, str_len(op));
 	write(1, "\n", 1);
+	moves++;//				DELETE
 }
 
 static void	op_push_src(t_list **temp_node, t_list **src, t_list **dest)
@@ -132,4 +137,10 @@ static void	op_push(t_list **src, t_list **dest, char *op)
 	}
 	write(1, op, 2);
 	write(1, "\n", 1);
+	moves++;//				DELETE
+}
+
+void	print_moves(void)//				DELETE
+{
+	printf("moves: %d", moves);
 }

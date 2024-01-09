@@ -1,0 +1,78 @@
+MAX: SIZE - 1
+
+SORT_1 :
+    if (a1 > a2 && a1 != max) && (else if b1 < b2 && b1 != 0) -> SS
+
+    else if a1 > a2 && a1 != MAX -> SA
+
+    else if b1 < b2 && b1 != 0 -> SB
+
+SORT_2 :
+    if (a1 > a2 && a1 != 0) && (b1 < b2 && b1 != MAX) -> SS
+
+    else if a1 > a2 && a1 != 0 -> SA
+
+    else if b1 < b2 && b2 != MAX -> SB
+
+push b (SIZE / 2) times
+{
+   SORT_1
+
+   if a_1 < SIZE / 2 -> PB
+
+   else -> RA
+}
+
+
+SIZE / 2 element on top of A && 0 element on botton of B
+{
+   SORT_1
+
+   if (a_1 != SIZE / 2) && (b_last != 0) -> RR
+
+   else if a_1 != SIZE / 2 -> RA
+
+   else if b_last != 0 -> RB
+}
+
+SIZE / 2 times
+{
+   SORT_1
+
+   PA
+}
+
+if check_sort break;
+
+push b (SIZE / 2) + (size % 2) times
+{
+   SORT_2
+   
+   if a_1 > (SIZE / 2) + (size % 2) -> PB
+
+   else -> RA
+}
+
+0 element on top of A && MAX element on top of B
+{
+   SORT_2
+
+   if (a_1 != 0) && (b_1 != MAX) -> RR
+
+   else if a_1 != 0 -> RA
+
+   else if b_1 != MAX -> RB
+}
+
+(SIZE / 2) + (size % 2) times
+{
+   
+   SORT_2
+   
+   PA
+}
+
+if check_sort break;
+
+
+

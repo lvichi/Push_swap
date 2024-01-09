@@ -39,8 +39,9 @@ else if a1 > a2 && a1 != max -> SA
 
 else if b1 < b2 && b2 != (half - 1) -> SB
 
-push a
+PA
 }
 
 check sort
+
 

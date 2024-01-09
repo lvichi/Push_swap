@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:36 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 18:42:13 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/08 20:50:08 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ static void	print_nodes(t_list *a, t_list *b)
 	if (a)
 	{
 		ft_putnbr(a->value);
-		write(1, "\tr_v: ", 6);
+		write(1, "\tr_v: ", 7);
 		ft_putnbr(a->r_v);
-		write(1, "\tnext: ", 7);
+		write(1, "\t\t->", 4);
 		ft_putnbr((a->next)->r_v);
-		write(1, "\tprev: ", 7);
+		write(1, "\t<-", 4);
 		ft_putnbr((a->prev)->r_v);
 		write(1, "\t\t", 2);
 	}
 	else
-		write(1, "\t\t\t\t\t", 6);
+		write(1, "\t\t\t\t\t\t", 6);
 	if (b)
 		print_nodes(b, NULL);
 	else
@@ -59,7 +59,7 @@ void	print_lists(t_list *a, t_list *b)
 
 	first_a = a;
 	first_b = b;
-	write(1, "STACK A:\t\t\t\tSTACK B:\n", 21);
+	write(1, "STACK A:\t\t\t\t\tSTACK B:\n", 23);
 	i = count_list(a);
 	if (count_list(b) > i)
 		i = count_list(b);
