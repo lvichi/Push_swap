@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 21:06:53 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:07:56 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
 void	print_lists(t_list *a, t_list *b);//             DELETE
+void	ft_putnbr(long nbr);//							DELETE and put static
 
 #endif

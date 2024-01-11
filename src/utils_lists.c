@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 20:41:48 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/09 03:00:04 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	check_sort(t_list *list, char order)
 	{
 		list = list->next;
 		if (order == 'a' && prev_num > list->r_v)
-				return (0);
+			return (0);
 		else if (order == 'd' && prev_num < list->r_v)
-				return (0);
+			return (0);
 		prev_num = list->r_v;
 	}
 	return (1);

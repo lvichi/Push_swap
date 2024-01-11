@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_list.c                                       :+:      :+:    :+:   */
+/*   print_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:36 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 20:50:08 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/11 20:42:01 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_putnbr(long nbr)
+void	ft_putnbr(long nbr)
 {
 	char	c;
 
@@ -74,6 +74,6 @@ void	print_lists(t_list *a, t_list *b)
 			b = b->next;
 		else
 			b = NULL;
-		usleep(100000);
+		usleep(10000);
 	}
 }

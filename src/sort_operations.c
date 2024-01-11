@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:56:42 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 21:05:07 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/11 22:22:02 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,5 @@ static void	op_push(t_list **src, t_list **dest, char *op)
 
 void	print_moves(void)//				DELETE
 {
-	printf("moves: %d", moves);
+	printf("moves: %d\n", moves);
 }
