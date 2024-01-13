@@ -6,7 +6,7 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:27:11 by skinners77        #+#    #+#             */
-/*   Updated: 2024/01/13 22:29:45 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/13 23:32:46 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_list	*sort_list(t_list *a)
 	size = count_list(a);
 	sort_big(&a, &b, size);
 	sort_min(&a, &b, size);
+	
+	print_lists(a, b);
 	if (check_sort(a, 'a'))
 		write(1, "\nOK!\n", 5);
 	else
@@ -40,11 +42,14 @@ static void	sort_big(t_list **a, t_list **b, size_t size)
 	size_t	range;
 
 	range = size / 10;
-	if (!check_sort(*a, 'a') && range >= 10)
+	while (!check_sort(*a, 'a') && range > 2)
 	{
 		move_r(a, b, size, range);
-		range = 1;
+		range = range / 2;
+		if (range <= 5)
+			range = 2;
 		move_r_back(a, b, size, range);
+		range = range / 2;
 	}
 }
 
@@ -72,7 +77,7 @@ static void	move_r(t_list **a, t_list **b, size_t size, size_t range)
 
 	count = 0;
 	limit = range;
-	while (*a && size > 2 && limit)
+	while (*a)
 	{
 		if ((*a)->r_v < limit)
 		{
@@ -95,7 +100,7 @@ static void	move_r_back(t_list **a, t_list **b, size_t size, size_t range)
 
 	count = size;
 	limit = size - range;
-	while (*b && size > 2)
+	while (*b && size)
 	{
 		if ((*b)->r_v >= limit)
 		{
@@ -110,5 +115,7 @@ static void	move_r_back(t_list **a, t_list **b, size_t size, size_t range)
 			limit = limit - range;
 		else if (count <= limit)
 			limit = limit - 1;
+		if (range == 2)
+			sort(a, b, size, 2);
 	}
 }

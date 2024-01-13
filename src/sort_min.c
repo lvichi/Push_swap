@@ -6,14 +6,14 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 22:19:11 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/13 22:49:00 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	rotate(t_list **a, t_list **b, size_t size, int type);
-static void	sort(t_list **a, t_list **b, size_t size, int type);
+void		sort(t_list **a, t_list **b, size_t size, int type);
 static void	move_first_half(t_list **a, t_list **b, size_t size);
 static void	move_second_half(t_list **a, t_list **b, size_t size);
 
@@ -33,7 +33,7 @@ void	sort_min(t_list **a, t_list **b, size_t size)
 	}
 }
 
-static void	sort(t_list **a, t_list **b, size_t size, int type)
+void	sort(t_list **a, t_list **b, size_t size, int type)
 {
 	if (type == 1)
 	{
