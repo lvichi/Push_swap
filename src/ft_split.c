@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:28:20 by lvichi            #+#    #+#             */
-/*   Updated: 2023/12/30 19:36:54 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:45:53 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,6 @@ static char	*ft_get_word(char const *s, size_t index, char *word, char c)
 	return (word);
 }
 
-static void	ft_free(int i, char **words)
-{
-	while (i > 0)
-		free(words[--i]);
-	free(words);
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**words;
@@ -115,7 +108,9 @@ char	**ft_split(char const *s, char c)
 		words[i] = (char *)malloc(sizeof(char) * (ft_get_size(s, c, i) + 1));
 		if (!words[i])
 		{
-			ft_free(i, words);
+			while (i > 0)
+				free(words[--i]);
+			free(words);
 			return (NULL);
 		}
 		words[i][0] = 0;

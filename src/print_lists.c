@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:36 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/11 20:42:01 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/13 20:04:58 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	print_lists(t_list *a, t_list *b)
 			b = b->next;
 		else
 			b = NULL;
-		usleep(10000);
+		usleep(100000);
 	}
 }

@@ -3,14 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/08 18:04:32 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:49:17 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+long		*ft_nbr_split(char *str);
+static long	*ft_split_array(int len, char **array);
+static int	check_input(int len, char **array);
+static int	check_duplicate(long n, long *numbers);
+
+int	main(int argc, char **argv)
+{
+	long	*numbers;
+	t_list	*a;
+
+	a = NULL;
+	if (argc < 2)
+		exit (0);
+	else if (argc == 2)
+		numbers = ft_nbr_split(argv[1]);
+	else
+		numbers = ft_split_array(argc - 1, &argv[1]);
+	if (!numbers)
+		write(1, "Error\n", 6);
+	else
+		a = init_stack(numbers);
+	if (a)
+	{
+		a = sort_list(a);
+		free_list(a);
+	}
+}
+
+long	*ft_nbr_split(char *str)
+{
+	long	*numbers;
+	ssize_t	i;
+	char	**array;
+
+	array = ft_split(str, ' ');
+	if (!array)
+		return (NULL);
+	numbers = ft_split_array(array_len(array), array);
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+	return (numbers);
+}
+
+static long	*ft_split_array(int len, char **array)
+{
+	long	*numbers;
+	ssize_t	i;
+
+	if (!check_input(len, array))
+		return (NULL);
+	numbers = (long *)ft_calloc(sizeof(long), len + 1);
+	if (!numbers)
+		return (NULL);
+	numbers[0] = len;
+	i = -1;
+	while (array[++i])
+		numbers[i + 1] = ft_atoi(array[i]);
+	i = 0;
+	while (++i <= numbers[0])
+	{
+		if (numbers[i] > INT_MAX || numbers[i] < INT_MIN
+			|| check_duplicate(numbers[i], numbers))
+		{
+			free(numbers);
+			return (NULL);
+		}
+	}
+	return (numbers);
+}
 
 static int	check_input(int len, char **array)
 {
@@ -45,71 +117,4 @@ static int	check_duplicate(long n, long *numbers)
 	if (count != 1)
 		return (1);
 	return (0);
-}
-
-static long	*ft_split_array(int len, char **array)
-{
-	long	*numbers;
-	ssize_t	i;
-
-	if (!check_input(len, array))
-		return (NULL);
-	numbers = (long *)ft_calloc(sizeof(long), len + 1);
-	if (!numbers)
-		return (NULL);
-	numbers[0] = len;
-	i = -1;
-	while (array[++i])
-		numbers[i + 1] = ft_atoi(array[i]);
-	i = 0;
-	while (++i <= numbers[0])
-	{
-		if (numbers[i] > INT_MAX || numbers[i] < INT_MIN
-			|| check_duplicate(numbers[i], numbers))
-		{
-			free(numbers);
-			return (NULL);
-		}
-	}
-	return (numbers);
-}
-
-static long	*ft_nbr_split(char *str)
-{
-	long	*numbers;
-	ssize_t	i;
-	char	**array;
-
-	array = ft_split(str, ' ');
-	if (!array)
-		return (NULL);
-	numbers = ft_split_array(array_len(array), array);
-	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
-	return (numbers);
-}
-
-int	main(int argc, char **argv)
-{
-	long	*numbers;
-	t_list	*a;
-
-	a = NULL;
-	if (argc < 2)
-		exit (0);
-	else if (argc == 2)
-		numbers = ft_nbr_split(argv[1]);
-	else
-		numbers = ft_split_array(argc - 1, &argv[1]);
-	if (!numbers)
-		write(1, "Error\n", 6);
-	else
-		a = init_stack(numbers);
-	if (a)
-	{
-		a = sort_list(a);
-		free_list(a);
-	}
 }

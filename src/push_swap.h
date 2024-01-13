@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/11 17:07:56 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/13 22:06:13 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ typedef struct s_list
 
 t_list	*init_stack(long *numbers);
 t_list	*sort_list(t_list *a);
+void	sort_min(t_list **a, t_list **b, size_t size);
 void	op_list(t_list **a, t_list **b, char *op);
 void	print_moves(void);//				    			DELETE
 char	**ft_split(char const *s, char c);
+long	*ft_nbr_split(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	count_list(t_list *list);
 void	free_list(t_list *list);
