@@ -6,7 +6,7 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/16 15:21:24 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:46:58 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,12 @@ static t_list	*sort_list(t_list *a)
 		sort_big(&a, &b, size);
 	else
 		sort_min(&a, &b, size);
-	print_lists(a, b);
-	if (check_sort(a, 'a'))
-		write(1, "\nOK!\n", 5);
-	else
-		write(1, "\nKO\n", 4);
-	print_moves();//					delete
+	// print_lists(a, b);
+	// if (check_sort(a, 'a'))
+	// 	write(1, "\nOK!\n", 5);
+	// else
+	// 	write(1, "\nKO\n", 4);
+	// print_moves();//					delete
 	free_list(b);
 	return (a);
 }
