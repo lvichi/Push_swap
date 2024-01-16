@@ -6,12 +6,13 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 22:49:00 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:05:06 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void		sort_min(t_list **a, t_list **b, size_t size);
 static void	rotate(t_list **a, t_list **b, size_t size, int type);
 void		sort(t_list **a, t_list **b, size_t size, int type);
 static void	move_first_half(t_list **a, t_list **b, size_t size);
@@ -69,7 +70,7 @@ static void	move_first_half(t_list **a, t_list **b, size_t size)
 	while (pb_count < size / 2)
 	{
 		sort(a, b, size, 1);
-		if ((*a)->r_v < size / 2)
+		if (*a && (*a)->r_v < size / 2)
 		{
 			op_list(a, b, "pb");
 			pb_count++;
@@ -97,7 +98,7 @@ static void	move_second_half(t_list **a, t_list **b, size_t size)
 		count = count + 1;
 	while (pb_count < count)
 	{
-		if ((*a)->r_v >= size / 2)
+		if (*a && (*a)->r_v >= size / 2)
 		{
 			op_list(a, b, "pb");
 			pb_count++;

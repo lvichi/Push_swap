@@ -6,11 +6,45 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:28:20 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 21:45:53 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:01:14 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+char			**ft_split(char const *s, char c);
+static size_t	ft_count_words(char const *s, char c);
+static int		ft_get_size(char const *s, char c, int index);
+static char		*ft_get_word(char const *s, size_t index, char *word, char c);
+
+char	**ft_split(char const *s, char c)
+{
+	char	**words;
+	int		w_count;
+	int		i;
+
+	w_count = ft_count_words(s, c);
+	words = (char **)malloc(sizeof(char *) * (w_count + 1));
+	if (!words)
+		return (NULL);
+	i = 0;
+	while (i < w_count)
+	{
+		words[i] = (char *)malloc(sizeof(char) * (ft_get_size(s, c, i) + 1));
+		if (!words[i])
+		{
+			while (i > 0)
+				free(words[--i]);
+			free(words);
+			return (NULL);
+		}
+		words[i][0] = 0;
+		words[i] = ft_get_word(s, i, words[i], c);
+		i++;
+	}
+	words[i] = 0;
+	return (words);
+}
 
 static size_t	ft_count_words(char const *s, char c)
 {
@@ -90,33 +124,4 @@ static char	*ft_get_word(char const *s, size_t index, char *word, char c)
 	}
 	word[t] = 0;
 	return (word);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**words;
-	int		w_count;
-	int		i;
-
-	w_count = ft_count_words(s, c);
-	words = (char **)malloc(sizeof(char *) * (w_count + 1));
-	if (!words)
-		return (NULL);
-	i = 0;
-	while (i < w_count)
-	{
-		words[i] = (char *)malloc(sizeof(char) * (ft_get_size(s, c, i) + 1));
-		if (!words[i])
-		{
-			while (i > 0)
-				free(words[--i]);
-			free(words);
-			return (NULL);
-		}
-		words[i][0] = 0;
-		words[i] = ft_get_word(s, i, words[i], c);
-		i++;
-	}
-	words[i] = 0;
-	return (words);
 }

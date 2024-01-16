@@ -6,7 +6,7 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 22:49:15 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:14:17 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ typedef struct s_list
 }	t_list;
 
 t_list	*init_stack(long *numbers);
-t_list	*sort_list(t_list *a);
-void	sort(t_list **a, t_list **b, size_t size, int type);
+void	sort_big(t_list **a, t_list **b, size_t size);
 void	sort_min(t_list **a, t_list **b, size_t size);
 void	op_list(t_list **a, t_list **b, char *op);
 void	print_moves(void);//				    			DELETE
@@ -38,6 +37,7 @@ char	**ft_split(char const *s, char c);
 long	*ft_nbr_split(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	count_list(t_list *list);
+int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
 size_t	array_len(char **array);

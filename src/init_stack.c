@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:24:03 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/06 21:04:45 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:10:28 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_list			*init_stack(long *numbers);
+static t_list	*relative_value(int index, long *numbers, t_list *node);
+static t_list	*new_node(int index, long *numbers, t_list *list);
+
+t_list	*init_stack(long *numbers)
+{
+	t_list	*a;
+	t_list	*first;
+	int		i;
+
+	a = NULL;
+	a = new_node(1, numbers, a);
+	first = a;
+	i = 1;
+	while (++i <= numbers[0])
+		a = new_node(i, numbers, a);
+	a->next = first;
+	first->prev = a;
+	a = first;
+	free(numbers);
+	return (a);
+}
 
 static t_list	*relative_value(int index, long *numbers, t_list *node)
 {
@@ -44,23 +67,4 @@ static t_list	*new_node(int index, long *numbers, t_list *list)
 	node->prev = list;
 	list->next = node;
 	return (node);
-}
-
-t_list	*init_stack(long *numbers)
-{
-	t_list	*a;
-	t_list	*first;
-	int		i;
-
-	a = NULL;
-	a = new_node(1, numbers, a);
-	first = a;
-	i = 1;
-	while (++i <= numbers[0])
-		a = new_node(i, numbers, a);
-	a->next = first;
-	first->prev = a;
-	a = first;
-	free(numbers);
-	return (a);
 }

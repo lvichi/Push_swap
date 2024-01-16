@@ -6,16 +6,17 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 21:49:17 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:21:24 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long		*ft_nbr_split(char *str);
-static long	*ft_split_array(int len, char **array);
-static int	check_input(int len, char **array);
-static int	check_duplicate(long n, long *numbers);
+int				main(int argc, char **argv);
+long			*ft_nbr_split(char *str);
+static long		*ft_split_array(int len, char **array);
+static int		check_input(int len, char **array);
+static t_list	*sort_list(t_list *a);
 
 int	main(int argc, char **argv)
 {
@@ -104,17 +105,23 @@ static int	check_input(int len, char **array)
 	return (1);
 }
 
-static int	check_duplicate(long n, long *numbers)
+static t_list	*sort_list(t_list *a)
 {
-	ssize_t	i;
-	size_t	count;
+	t_list	*b;
+	size_t	size;
 
-	count = 0;
-	i = 0;
-	while (++i <= numbers[0])
-		if (numbers[i] == n)
-			count++;
-	if (count != 1)
-		return (1);
-	return (0);
+	b = NULL;
+	size = count_list(a);
+	if (size >= 16)
+		sort_big(&a, &b, size);
+	else
+		sort_min(&a, &b, size);
+	print_lists(a, b);
+	if (check_sort(a, 'a'))
+		write(1, "\nOK!\n", 5);
+	else
+		write(1, "\nKO\n", 4);
+	print_moves();//					delete
+	free_list(b);
+	return (a);
 }

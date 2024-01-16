@@ -6,50 +6,15 @@
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:36 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/13 22:54:26 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:06:29 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_putnbr(long nbr)
-{
-	char	c;
-
-	if (nbr < 0)
-	{
-		write(1, "-", 1);
-		nbr = -nbr;
-	}
-	while (nbr > 9)
-	{
-		ft_putnbr(nbr / 10);
-		nbr = nbr % 10;
-	}
-	c = nbr + '0';
-	write(1, &c, 1);
-}
-
-static void	print_nodes(t_list *a, t_list *b)
-{
-	if (a)
-	{
-		ft_putnbr(a->value);
-		write(1, "\tr_v: ", 7);
-		ft_putnbr(a->r_v);
-		write(1, "\t\t->", 4);
-		ft_putnbr((a->next)->r_v);
-		write(1, "\t<-", 4);
-		ft_putnbr((a->prev)->r_v);
-		write(1, "\t\t", 2);
-	}
-	else
-		write(1, "\t\t\t\t\t\t", 6);
-	if (b)
-		print_nodes(b, NULL);
-	else
-		write(1, "\n", 1);
-}
+void		print_lists(t_list *a, t_list *b);
+static void	print_nodes(t_list *a, t_list *b);
+void		ft_putnbr(long nbr);
 
 void	print_lists(t_list *a, t_list *b)
 {
@@ -74,6 +39,45 @@ void	print_lists(t_list *a, t_list *b)
 			b = b->next;
 		else
 			b = NULL;
-		usleep(10000);
+		usleep(1000);
 	}
+}
+
+static void	print_nodes(t_list *a, t_list *b)
+{
+	if (a)
+	{
+		ft_putnbr(a->value);
+		write(1, "\tr_v: ", 7);
+		ft_putnbr(a->r_v);
+		write(1, "\t\t->", 4);
+		ft_putnbr((a->next)->r_v);
+		write(1, "\t<-", 4);
+		ft_putnbr((a->prev)->r_v);
+		write(1, "\t\t", 2);
+	}
+	else
+		write(1, "\t\t\t\t\t\t", 6);
+	if (b)
+		print_nodes(b, NULL);
+	else
+		write(1, "\n", 1);
+}
+
+void	ft_putnbr(long nbr)
+{
+	char	c;
+
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr = -nbr;
+	}
+	while (nbr > 9)
+	{
+		ft_putnbr(nbr / 10);
+		nbr = nbr % 10;
+	}
+	c = nbr + '0';
+	write(1, &c, 1);
 }

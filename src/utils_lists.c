@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
+/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/09 03:00:04 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:59:33 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+size_t	count_list(t_list *list);
+int		check_duplicate(long n, long *numbers);
+void	free_list(t_list *list);
+int		check_sort(t_list *list, char order);
 
 size_t	count_list(t_list *list)
 {
@@ -29,6 +34,21 @@ size_t	count_list(t_list *list)
 		list = list->next;
 	}
 	return (size);
+}
+
+int	check_duplicate(long n, long *numbers)
+{
+	ssize_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while (++i <= numbers[0])
+		if (numbers[i] == n)
+			count++;
+	if (count != 1)
+		return (1);
+	return (0);
 }
 
 void	free_list(t_list *list)

@@ -1,55 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:27:11 by skinners77        #+#    #+#             */
-/*   Updated: 2024/01/13 23:32:46 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/16 15:33:56 by skinners77       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		sort_big(t_list **a, t_list **b, size_t size);
+void			sort_big(t_list **a, t_list **b, size_t size);
 static void		move_r(t_list **a, t_list **b, size_t size, size_t range);
 static size_t	find_next(t_list **list, size_t size, size_t min, size_t max);
 static void		move_r_back(t_list **a, t_list **b, size_t size, size_t range);
+static void		first_sort(t_list **a, t_list **b, size_t size, size_t i);
 
-t_list	*sort_list(t_list *a)
-{
-	t_list	*b;
-	size_t	size;
-
-	b = NULL;
-	size = count_list(a);
-	sort_big(&a, &b, size);
-	sort_min(&a, &b, size);
-	
-	print_lists(a, b);
-	if (check_sort(a, 'a'))
-		write(1, "\nOK!\n", 5);
-	else
-		write(1, "\nKO\n", 4);
-	print_moves();//					delete
-	free_list(b);
-	return (a);
-}
-
-static void	sort_big(t_list **a, t_list **b, size_t size)
+void	sort_big(t_list **a, t_list **b, size_t size)
 {
 	size_t	range;
 
 	range = size / 10;
-	while (!check_sort(*a, 'a') && range > 2)
+	if (!check_sort(*a, 'a'))
 	{
+		first_sort(a, b, size, 0);
 		move_r(a, b, size, range);
-		range = range / 2;
-		if (range <= 5)
-			range = 2;
+		range = 1;
 		move_r_back(a, b, size, range);
-		range = range / 2;
 	}
 }
 
@@ -68,6 +47,33 @@ static size_t	find_next(t_list **list, size_t size, size_t min, size_t max)
 		temp_list = temp_list->next;
 	}
 	return (0);
+}
+
+static void	first_sort(t_list **a, t_list **b, size_t size, size_t i)
+{
+	while (*a)
+	{
+		op_list(a, b, "pb");
+		if (*b && (*b)->r_v < (size / 2))
+			op_list(a, b, "rb");
+	}
+	while (*b && i++ < (size / 2))
+	{
+		op_list(a, b, "pa");
+		if (*a && (*a)->r_v > (size - size / 4))
+			op_list(a, b, "ra");
+	}
+	while (*b && i < size - size / 4)
+	{
+		if ((*b)->r_v >= size / 4 && i++)
+			op_list(a, b, "pa");
+		else if (find_next(b, size, (size / 4), (size / 2)) < (size / 4))
+			op_list(a, b, "rb");
+		else
+			op_list(a, b, "rrb");
+	}
+	while (*b)
+		op_list(a, b, "pa");
 }
 
 static void	move_r(t_list **a, t_list **b, size_t size, size_t range)
@@ -100,22 +106,20 @@ static void	move_r_back(t_list **a, t_list **b, size_t size, size_t range)
 
 	count = size;
 	limit = size - range;
-	while (*b && size)
+	while (*b)
 	{
 		if ((*b)->r_v >= limit)
 		{
 			op_list(a, b, "pa");
 			count--;
 		}
-		else if (find_next(b, size, limit, size - 1) < (count / 2))
+		else if (find_next(b, size, limit, size) < (count / 2))
 			op_list(a, b, "rb");
 		else
 			op_list(a, b, "rrb");
-		if (count <= limit && range > 0 && limit >= range)
+		if (count <= limit && range > 0 && limit > range)
 			limit = limit - range;
 		else if (count <= limit)
 			limit = limit - 1;
-		if (range == 2)
-			sort(a, b, size, 2);
 	}
 }
