@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/16 15:46:58 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/20 17:47:57 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	else
 		numbers = ft_split_array(argc - 1, &argv[1]);
 	if (!numbers)
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 	else
 		a = init_stack(numbers);
 	if (a)
@@ -50,6 +50,11 @@ long	*ft_nbr_split(char *str)
 	array = ft_split(str, ' ');
 	if (!array)
 		return (NULL);
+	if (!array_len(array))
+	{
+		free(array);
+		return (NULL);
+	}
 	numbers = ft_split_array(array_len(array), array);
 	i = -1;
 	while (array[++i])
@@ -94,7 +99,7 @@ static int	check_input(int len, char **array)
 	while (++i < len)
 	{
 		j = -1;
-		if (array[i][0] == '-' || array[i][0] == '+')
+		if ((array[i][0] == '-' || array[i][0] == '+') && array[i][1])
 			j++;
 		while (array[i][++j])
 			if (array[i][j] < '0' || array[i][j] > '9')

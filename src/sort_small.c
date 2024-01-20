@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_min.c                                         :+:      :+:    :+:   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/16 15:05:06 by skinners77       ###   ########.fr       */
+/*   Updated: 2024/01/20 18:33:20 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void		sort_min(t_list **a, t_list **b, size_t size);
-static void	rotate(t_list **a, t_list **b, size_t size, int type);
+static void	rotate(t_list **a, t_list **b, size_t size);
 void		sort(t_list **a, t_list **b, size_t size, int type);
 static void	move_first_half(t_list **a, t_list **b, size_t size);
 static void	move_second_half(t_list **a, t_list **b, size_t size);
@@ -23,7 +23,7 @@ void	sort_min(t_list **a, t_list **b, size_t size)
 	while (!check_sort(*a, 'a') && size < 4)
 	{
 		sort(a, b, size, 2);
-		op_list(a, b, "ra");
+		op_list(a, b, "rra");
 	}
 	while (!check_sort(*a, 'a'))
 	{
@@ -67,10 +67,9 @@ static void	move_first_half(t_list **a, t_list **b, size_t size)
 	size_t	pb_count;
 
 	pb_count = 0;
-	while (pb_count < size / 2)
+	while (pb_count < size - size / 2)
 	{
-		sort(a, b, size, 1);
-		if (*a && (*a)->r_v < size / 2)
+		if (*a && (*a)->r_v < size - size / 2)
 		{
 			op_list(a, b, "pb");
 			pb_count++;
@@ -78,13 +77,12 @@ static void	move_first_half(t_list **a, t_list **b, size_t size)
 		else
 			op_list(a, b, "ra");
 	}
-	rotate(a, b, size, 1);
+	rotate(a, b, size);
 	while (*b)
 	{
 		sort(a, b, size, 1);
 		op_list(a, b, "pa");
 	}
-	rotate(a, b, size, 2);
 }
 
 static void	move_second_half(t_list **a, t_list **b, size_t size)
@@ -107,39 +105,24 @@ static void	move_second_half(t_list **a, t_list **b, size_t size)
 			op_list(a, b, "ra");
 		sort(a, b, size, 2);
 	}
-	rotate(a, b, size, 2);
 	while (*b)
 	{
 		sort(a, b, size, 2);
 		op_list(a, b, "pa");
 	}
-	rotate(a, b, size, 2);
 }
 
-static void	rotate(t_list **a, t_list **b, size_t size, int type)
+static void	rotate(t_list **a, t_list **b, size_t size)
 {
-	if (type == 1)
+	while ((*a && (*a)->r_v != size - size / 2) || (*b && ((*b)->prev)->r_v != 0))
 	{
-		while ((*a && (*a)->r_v != size / 2) || (*b && ((*b)->prev)->r_v != 0))
-		{
-			sort(a, b, size, 1);
-			if (*a && *b && (*a)->r_v != size / 2 && ((*b)->prev)->r_v != 0)
-				op_list(a, b, "rr");
-			else if (*a && (*a)->r_v != size / 2)
-				op_list(a, b, "ra");
-			else if (*b && ((*b)->prev)->r_v != 0)
-				op_list(a, b, "rb");
-		}
-		return ;
-	}
-	while ((*a && ((*a)->r_v != 0)) || (*b && (*b)->r_v != size - 1))
-	{
-		sort(a, b, size, 2);
-		if (*a && *b && (*a)->r_v != 0 && (*b)->r_v != size - 1)
+		sort(a, b, size, 1);
+		if (*a && *b && (*a)->r_v != size - size / 2 && ((*b)->prev)->r_v != 0)
 			op_list(a, b, "rr");
-		else if (*a && (*a)->r_v != 0)
+		else if (*a && (*a)->r_v != size - size / 2)
 			op_list(a, b, "ra");
-		else if (*b && (*b)->r_v != size - 1)
+		else if (*b && ((*b)->prev)->r_v != 0)
 			op_list(a, b, "rb");
 	}
+	return ;
 }

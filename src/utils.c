@@ -6,11 +6,17 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:22:18 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/07 00:20:01 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/01/20 16:24:24 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	*ft_calloc(size_t nmemb, size_t size);
+size_t	array_len(char **array);
+size_t	str_len(char *str);
+long	ft_atoi(char *nptr);
+int		ft_strcmp(const char *s1, const char *s2);
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
