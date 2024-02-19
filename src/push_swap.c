@@ -6,14 +6,14 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/20 17:47:57 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/16 14:23:51 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int				main(int argc, char **argv);
-long			*ft_nbr_split(char *str);
+static long		*ft_nbr_split(char *str);
 static long		*ft_split_array(int len, char **array);
 static int		check_input(int len, char **array);
 static t_list	*sort_list(t_list *a);
@@ -120,13 +120,7 @@ static t_list	*sort_list(t_list *a)
 	if (size >= 16)
 		sort_big(&a, &b, size);
 	else
-		sort_min(&a, &b, size);
-	// print_lists(a, b);
-	// if (check_sort(a, 'a'))
-	// 	write(1, "\nOK!\n", 5);
-	// else
-	// 	write(1, "\nKO\n", 4);
-	// print_moves();//					delete
+		sort_small(&a, &b, size);
 	free_list(b);
 	return (a);
 }

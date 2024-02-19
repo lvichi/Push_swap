@@ -6,19 +6,19 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/01/20 18:33:20 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/16 14:31:54 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_min(t_list **a, t_list **b, size_t size);
+void		sort_small(t_list **a, t_list **b, size_t size);
 static void	rotate(t_list **a, t_list **b, size_t size);
-void		sort(t_list **a, t_list **b, size_t size, int type);
+static void	sort(t_list **a, t_list **b, size_t size, int type);
 static void	move_first_half(t_list **a, t_list **b, size_t size);
 static void	move_second_half(t_list **a, t_list **b, size_t size);
 
-void	sort_min(t_list **a, t_list **b, size_t size)
+void	sort_small(t_list **a, t_list **b, size_t size)
 {
 	while (!check_sort(*a, 'a') && size < 4)
 	{
@@ -34,7 +34,7 @@ void	sort_min(t_list **a, t_list **b, size_t size)
 	}
 }
 
-void	sort(t_list **a, t_list **b, size_t size, int type)
+static void	sort(t_list **a, t_list **b, size_t size, int type)
 {
 	if (type == 1)
 	{
@@ -114,7 +114,8 @@ static void	move_second_half(t_list **a, t_list **b, size_t size)
 
 static void	rotate(t_list **a, t_list **b, size_t size)
 {
-	while ((*a && (*a)->r_v != size - size / 2) || (*b && ((*b)->prev)->r_v != 0))
+	while ((*a && (*a)->r_v != size - size / 2) || (*b
+			&& ((*b)->prev)->r_v != 0))
 	{
 		sort(a, b, size, 1);
 		if (*a && *b && (*a)->r_v != size - size / 2 && ((*b)->prev)->r_v != 0)

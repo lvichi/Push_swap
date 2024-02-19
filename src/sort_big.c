@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   sort_big.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skinners77 <lvichi@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:27:11 by skinners77        #+#    #+#             */
-/*   Updated: 2024/01/16 15:33:56 by skinners77       ###   ########.fr       */
+/*   Created: 2024/01/12 15:27:11 by lvichi            #+#    #+#             */
+/*   Updated: 2024/02/16 16:15:01 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void			sort_big(t_list **a, t_list **b, size_t size);
-static void		move_r(t_list **a, t_list **b, size_t size, size_t range);
-static size_t	find_next(t_list **list, size_t size, size_t min, size_t max);
-static void		move_r_back(t_list **a, t_list **b, size_t size, size_t range);
 static void		first_sort(t_list **a, t_list **b, size_t size, size_t i);
+static void		move_r(t_list **a, t_list **b, size_t size, size_t range);
+static size_t	find_next(t_list **list, size_t size, size_t min, size_t max, int direction);
+static void		move_r_back(t_list **a, t_list **b, size_t size, size_t range);
 
 void	sort_big(t_list **a, t_list **b, size_t size)
 {
@@ -32,7 +32,34 @@ void	sort_big(t_list **a, t_list **b, size_t size)
 	}
 }
 
-static size_t	find_next(t_list **list, size_t size, size_t min, size_t max)
+static void	first_sort(t_list **a, t_list **b, size_t size, size_t i)
+{
+	while (*a && size)
+	{
+		op_list(a, b, "pb");
+		if (*b && (*b)->r_v < (size / 2))
+			op_list(a, b, "rb");
+	}
+	while (*b && size && i++ < (size / 2))
+	{
+		op_list(a, b, "pa");
+		if (*a && (*a)->r_v > (size - size / 4))
+			op_list(a, b, "ra");
+	}
+	while (*b && size && i < size - size / 4)
+	{
+		if ((*b)->r_v >= size / 4 && i++)
+			op_list(a, b, "pa");
+		else if (find_next(b, size, (size / 4), (size / 2), 1) < (size / 4))
+			op_list(a, b, "rb");
+		else
+			op_list(a, b, "rrb");
+	}
+	while (*b)
+		op_list(a, b, "pa");
+}
+
+static size_t	find_next(t_list **list, size_t size, size_t min, size_t max, int direction)
 {
 	t_list	*temp_list;
 	size_t	count;
@@ -44,36 +71,12 @@ static size_t	find_next(t_list **list, size_t size, size_t min, size_t max)
 		count++;
 		if (temp_list->r_v >= min && temp_list->r_v < max)
 			return (count);
-		temp_list = temp_list->next;
+		if (direction)
+			temp_list = temp_list->next;
+		else
+			temp_list = temp_list->prev;
 	}
 	return (0);
-}
-
-static void	first_sort(t_list **a, t_list **b, size_t size, size_t i)
-{
-	while (*a)
-	{
-		op_list(a, b, "pb");
-		if (*b && (*b)->r_v < (size / 2))
-			op_list(a, b, "rb");
-	}
-	while (*b && i++ < (size / 2))
-	{
-		op_list(a, b, "pa");
-		if (*a && (*a)->r_v > (size - size / 4))
-			op_list(a, b, "ra");
-	}
-	while (*b && i < size - size / 4)
-	{
-		if ((*b)->r_v >= size / 4 && i++)
-			op_list(a, b, "pa");
-		else if (find_next(b, size, (size / 4), (size / 2)) < (size / 4))
-			op_list(a, b, "rb");
-		else
-			op_list(a, b, "rrb");
-	}
-	while (*b)
-		op_list(a, b, "pa");
 }
 
 static void	move_r(t_list **a, t_list **b, size_t size, size_t range)
@@ -83,14 +86,14 @@ static void	move_r(t_list **a, t_list **b, size_t size, size_t range)
 
 	count = 0;
 	limit = range;
-	while (*a)
+	while (*a && size)
 	{
 		if ((*a)->r_v < limit)
 		{
 			op_list(a, b, "pb");
 			count++;
 		}
-		else if (find_next(a, size, 0, limit) < ((size - count) / 2))
+		else if (find_next(a, size, 0, limit, 1) < find_next(a, size, 0, limit, 0))
 			op_list(a, b, "ra");
 		else
 			op_list(a, b, "rra");
@@ -106,14 +109,14 @@ static void	move_r_back(t_list **a, t_list **b, size_t size, size_t range)
 
 	count = size;
 	limit = size - range;
-	while (*b)
+	while (*b && size)
 	{
 		if ((*b)->r_v >= limit)
 		{
 			op_list(a, b, "pa");
 			count--;
 		}
-		else if (find_next(b, size, limit, size) < (count / 2))
+		else if (find_next(b, size, limit, size, 1) < (count / 2))
 			op_list(a, b, "rb");
 		else
 			op_list(a, b, "rrb");
