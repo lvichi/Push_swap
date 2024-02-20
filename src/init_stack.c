@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:24:03 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/16 14:30:00 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/20 22:31:27 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static t_list	*relative_value(int index, long *numbers, t_list *node)
 		if (numbers[i] < numbers[index])
 			relative_value++;
 	node->r_v = relative_value;
+	node->transfer_cost_a = 0;
+	node->transfer_cost_b = 0;
 	return (node);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/16 14:37:30 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/20 22:31:10 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h> //delete
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -23,6 +24,8 @@ typedef struct s_list
 {
 	int				value;
 	size_t			r_v;
+	int				transfer_cost_a;
+	int				transfer_cost_b;
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;
@@ -42,6 +45,7 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
+void	print_list(t_list *a, t_list *b);
 //utils.c
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	array_len(char **array);

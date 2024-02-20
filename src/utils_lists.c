@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/16 14:30:17 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/20 22:34:25 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
+void	print_list(t_list *a, t_list *b);
 
 size_t	count_list(t_list *list)
 {
@@ -90,4 +91,27 @@ int	check_sort(t_list *list, char order)
 		prev_num = list->r_v;
 	}
 	return (1);
+}
+
+void	print_list(t_list *a, t_list *b)
+{
+	size_t	i;
+
+	printf("\n---  Stack A:  ---\n");
+	i = 0;
+	while (i++ < count_list(a))
+	{
+		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
+			a->value, a->r_v, a->transfer_cost_a, a->transfer_cost_b);
+		a = a->next;
+	}
+	printf("\n---  Stack A:  ---\n");
+	i = 0;
+	while (i++ < count_list(b))
+	{
+		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
+			b->value, b->r_v, b->transfer_cost_a, b->transfer_cost_b);
+		b = b->next;
+	}
+	printf("\n");
 }
