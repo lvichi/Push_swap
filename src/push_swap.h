@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/20 22:31:10 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/21 17:18:05 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_list
 t_list	*init_stack(long *numbers);
 //sort_big.c
 void	sort_big(t_list **a, t_list **b, size_t size);
+//sort_big_2.c
+void	sort_big_2(t_list **a, t_list **b, size_t size);
 //sort_small.c
 void	sort_small(t_list **a, t_list **b, size_t size);
 //sort_operations.c
@@ -52,5 +54,6 @@ size_t	array_len(char **array);
 size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_abs(int nbr);
 
 #endif

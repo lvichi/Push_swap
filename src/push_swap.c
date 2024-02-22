@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/16 14:23:51 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 16:35:09 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ static t_list	*sort_list(t_list *a)
 	b = NULL;
 	size = count_list(a);
 	if (size >= 16)
+	{
+		//sort_big_2(&a, &b, size);
 		sort_big(&a, &b, size);
+	}
 	else
 		sort_small(&a, &b, size);
 	free_list(b);

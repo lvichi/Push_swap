@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_big.c                                         :+:      :+:    :+:   */
+/*   sort_big_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:27:11 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/20 17:07:56 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/21 19:14:33 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void			sort_big(t_list **a, t_list **b, size_t size);
+void			sort_big_2(t_list **a, t_list **b, size_t size);
 static void		first_sort(t_list **a, t_list **b, size_t size, size_t i);
 static void		move_r(t_list **a, t_list **b, size_t size, size_t range);
 static size_t	find_next(t_list **list, size_t min, size_t max, int direction);
@@ -43,24 +43,26 @@ static void		new_sort_2(t_list **a, t_list **b, int reverse);
 }*/
 
 
-void	sort_big(t_list **a, t_list **b, size_t size)
+void	sort_big_2(t_list **a, t_list **b, size_t size)
 {
 	size_t	range;
 
-	range = size;
+	range = size / 4;
 	if (!check_sort(*a, 'a'))
 	{
 		first_sort(a, b, 0, 0);
+		//range /= 5;
+		move_r(a, b, size, range);
+		//new_sort_2(a, b, 0);
+		new_sort_2(a, b, 1);
 		range /= 5;
-		move_r(a, b, 0, 12);
-		new_sort_2(a, b, 0);
-		//new_sort_2(a, b, 1);
-		range /= 5;
-		move_r_back(a, b, size, 1);
+		move_r_back(a, b, 0, 1);
 		range /= 2;
 		//if (range < 15)
 		range = 1;
 	}
+	while (*b)
+		op_list(a, b, "pa");
 }
 
 static void	first_sort(t_list **a, t_list **b, size_t size, size_t i)
@@ -71,6 +73,7 @@ static void	first_sort(t_list **a, t_list **b, size_t size, size_t i)
 		if (*b && (*b)->r_v < (size / 2))
 			op_list(a, b, "rb");
 	}
+	//size = 0;
 	while (*b && size && i++ < (size / 2))
 	{
 		op_list(a, b, "pa");

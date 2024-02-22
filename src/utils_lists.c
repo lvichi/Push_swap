@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/20 22:34:25 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 17:02:32 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	print_list(t_list *a, t_list *b)
 			a->value, a->r_v, a->transfer_cost_a, a->transfer_cost_b);
 		a = a->next;
 	}
-	printf("\n---  Stack A:  ---\n");
+	printf("\n---  Stack B:  ---\n");
 	i = 0;
 	while (i++ < count_list(b))
 	{
