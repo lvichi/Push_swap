@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/21 17:18:05 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 18:51:48 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h> //delete
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -33,9 +32,7 @@ typedef struct s_list
 //init_stack.c
 t_list	*init_stack(long *numbers);
 //sort_big.c
-void	sort_big(t_list **a, t_list **b, size_t size);
-//sort_big_2.c
-void	sort_big_2(t_list **a, t_list **b, size_t size);
+void	sort_big(t_list **a, t_list **b);
 //sort_small.c
 void	sort_small(t_list **a, t_list **b, size_t size);
 //sort_operations.c
@@ -47,7 +44,6 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
-void	print_list(t_list *a, t_list *b);
 //utils.c
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	array_len(char **array);

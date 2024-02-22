@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/22 17:02:32 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 18:51:02 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
-void	print_list(t_list *a, t_list *b);
 
 size_t	count_list(t_list *list)
 {
@@ -93,7 +92,7 @@ int	check_sort(t_list *list, char order)
 	return (1);
 }
 
-void	print_list(t_list *a, t_list *b)
+/*void	print_list(t_list *a, t_list *b)
 {
 	size_t	i;
 
@@ -114,4 +113,4 @@ void	print_list(t_list *a, t_list *b)
 		b = b->next;
 	}
 	printf("\n");
-}
+}*/
