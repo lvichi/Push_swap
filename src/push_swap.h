@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:07:58 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/22 18:51:48 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 23:34:20 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ typedef struct s_list
 
 //init_stack.c
 t_list	*init_stack(long *numbers);
-//sort_big.c
-void	sort_big(t_list **a, t_list **b);
-//sort_small.c
-void	sort_small(t_list **a, t_list **b, size_t size);
+//sort.c
+void	sort_three(t_list **list, char type);
+void	transfer_cheap(t_list **a, t_list **b, int size_a, int size_b);
 //sort_operations.c
 void	op_list(t_list **a, t_list **b, char *op);
 //ft_split.c
@@ -44,12 +43,12 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
+int		find_next(t_list *list, int size, int min, int max);
 //utils.c
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	array_len(char **array);
 size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_abs(int nbr);
 
 #endif

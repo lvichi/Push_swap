@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/22 18:51:02 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 23:36:53 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ size_t	count_list(t_list *list);
 int		check_duplicate(long n, long *numbers);
 void	free_list(t_list *list);
 int		check_sort(t_list *list, char order);
+int		find_next(t_list *list, int size, int min, int max);
 
 size_t	count_list(t_list *list)
 {
@@ -92,25 +93,22 @@ int	check_sort(t_list *list, char order)
 	return (1);
 }
 
-/*void	print_list(t_list *a, t_list *b)
+int	find_next(t_list *list, int size, int min, int max)
 {
-	size_t	i;
+	int		i;
+	int		size_list;
 
-	printf("\n---  Stack A:  ---\n");
-	i = 0;
-	while (i++ < count_list(a))
+	size_list = (int)count_list(list);
+	i = -1;
+	while (++i < size_list && size)
 	{
-		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
-			a->value, a->r_v, a->transfer_cost_a, a->transfer_cost_b);
-		a = a->next;
+		if (((int)list->r_v == min && (int)(list->prev)->r_v == max)
+			|| (min == -1 && (int)(list->prev)->r_v == max)
+			|| (max == size && (int)list->r_v == min))
+			break ;
+		list = list->next;
 	}
-	printf("\n---  Stack B:  ---\n");
-	i = 0;
-	while (i++ < count_list(b))
-	{
-		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
-			b->value, b->r_v, b->transfer_cost_a, b->transfer_cost_b);
-		b = b->next;
-	}
-	printf("\n");
-}*/
+	if (i > (size_list / 2))
+		i = i - size_list;
+	return (i);
+}

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/16 14:31:54 by lvichi           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    sort_small.bkp                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/04 17:02:23 by lvichi            #+#    #+#              #
+#    Updated: 2024/02/22 23:36:48 by lvichi           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #include "push_swap.h"
 
@@ -127,3 +127,27 @@ static void	rotate(t_list **a, t_list **b, size_t size)
 	}
 	return ;
 }
+
+
+/*void	print_list(t_list *a, t_list *b)
+{
+	size_t	i;
+
+	printf("\n---  Stack A:  ---\n");
+	i = 0;
+	while (i++ < count_list(a))
+	{
+		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
+			a->value, a->r_v, a->transfer_cost_a, a->transfer_cost_b);
+		a = a->next;
+	}
+	printf("\n---  Stack B:  ---\n");
+	i = 0;
+	while (i++ < count_list(b))
+	{
+		printf("%d\t%ld\ttransfer_cost_a: %d\ttransfer_cost_b: %d\n",
+			b->value, b->r_v, b->transfer_cost_a, b->transfer_cost_b);
+		b = b->next;
+	}
+	printf("\n");
+}*/

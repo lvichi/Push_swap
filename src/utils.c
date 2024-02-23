@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:22:18 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/21 12:26:10 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/22 23:21:54 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ size_t	array_len(char **array);
 size_t	str_len(char *str);
 long	ft_atoi(char *nptr);
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_abs(int nbr);
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -90,12 +89,4 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-int	ft_abs(int nbr)
-{
-	if (nbr >= 0)
-		return (nbr);
-	else
-		return (nbr * -1);
 }
