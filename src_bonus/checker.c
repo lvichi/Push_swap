@@ -1,47 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/23 16:19:11 by lvichi           ###   ########.fr       */
+/*   Created: 2024/02/23 17:07:33 by lvichi            #+#    #+#             */
+/*   Updated: 2024/02/26 17:00:06 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-int				main(int argc, char **argv);
-static long		*ft_nbr_split(char *str);
-static long		*ft_split_array(int len, char **array);
-static int		check_input(int len, char **array);
-static void		sort(t_list **a, t_list **b);
+int			main(int argc, char **argv);
+static long	*ft_nbr_split(char *str);
+static long	*ft_split_array(int len, char **array);
+static int	check_input(int len, char **array);
+static void	sort(t_list *a, t_list *b, char **moves_list);
 
 int	main(int argc, char **argv)
 {
 	long	*numbers;
+	char	**moves_list;
 	t_list	*a;
 	t_list	*b;
 
 	a = NULL;
 	b = NULL;
+	moves_list = NULL;
 	if (argc < 2)
 		exit (0);
 	else if (argc == 2)
 		numbers = ft_nbr_split(argv[1]);
 	else
 		numbers = ft_split_array(argc - 1, &argv[1]);
-	if (!numbers)
+	if (!numbers || get_moves_list(&moves_list))
 		write(2, "Error\n", 6);
 	else
 		a = init_stack(numbers);
-	if (!a)
-		return (0);
-	if (!check_sort(a, 'a'))
-		sort(&a, &b);
-	free_list(a);
-	free_list(b);
+	if (a)
+		sort(a, b, moves_list);
+	free_lists(a, b, numbers, moves_list);
 }
 
 long	*ft_nbr_split(char *str)
@@ -113,28 +112,14 @@ static int	check_input(int len, char **array)
 	return (1);
 }
 
-static void	sort(t_list **a, t_list **b)
+static void	sort(t_list *a, t_list *b, char **moves_list)
 {
+	int		i;
 	size_t	size;
 
-	size = count_list(*a);
-	while (count_list(*b) != 3 && count_list(*a) > 3)
-	{
-		if ((*a)->r_v < (size - 3))
-			op_list(a, b, "pb");
-		else
-			op_list(a, b, "ra");
-	}
-	sort_three(b, 'b');
-	while (count_list(*a) > 3)
-		transfer_cheap(a, b, (int)count_list(*a), (int)count_list(*b));
-	sort_three(a, 'a');
-	if ((*b) && find_next(*b, count_list(*b), size - 4, count_list(*b)) > 0)
-		while ((*b)->r_v != size - 4)
-			op_list(a, b, "rb");
-	else if ((*b))
-		while ((*b)->r_v != size - 4)
-			op_list(a, b, "rrb");
-	while (*b)
-		op_list(a, b, "pa");
+	size = count_list(a);
+	i = -1;
+	while (moves_list && moves_list[++i])
+		op_list(&a, &b, moves_list[i]);
+	check_sort(a, size);
 }

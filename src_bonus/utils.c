@@ -6,11 +6,11 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 17:22:18 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/25 22:11:03 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:52:16 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	array_len(char **array);
@@ -36,7 +36,7 @@ size_t	array_len(char **array)
 	size_t	i;
 
 	i = 0;
-	while (array[i])
+	while (array && array[i])
 		i++;
 	return (i);
 }
@@ -46,7 +46,7 @@ size_t	str_len(char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 		i++;
 	return (i);
 }
