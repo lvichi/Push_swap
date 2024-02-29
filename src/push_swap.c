@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:39:01 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/23 16:19:11 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/29 15:51:57 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,23 +118,22 @@ static void	sort(t_list **a, t_list **b)
 	size_t	size;
 
 	size = count_list(*a);
-	while (count_list(*b) != 3 && count_list(*a) > 3)
+	while (*a && size > 5)
 	{
-		if ((*a)->r_v < (size - 3))
-			op_list(a, b, "pb");
-		else
-			op_list(a, b, "ra");
-	}
-	sort_three(b, 'b');
-	while (count_list(*a) > 3)
-		transfer_cheap(a, b, (int)count_list(*a), (int)count_list(*b));
-	sort_three(a, 'a');
-	if ((*b) && find_next(*b, count_list(*b), size - 4, count_list(*b)) > 0)
-		while ((*b)->r_v != size - 4)
+		op_list(a, b, "pb");
+		if ((*b)->r_v <= (size / 2))
 			op_list(a, b, "rb");
-	else if ((*b))
-		while ((*b)->r_v != size - 4)
-			op_list(a, b, "rrb");
-	while (*b)
+	}
+	while (count_list(*a) > 3)
+		op_list(a, b, "pb");
+	if (*a)
+		sort_three(a, 'a');
+	else
 		op_list(a, b, "pa");
+	while (*b)
+		transfer_cheap(a, b, (int)count_list(*a), (int)count_list(*b));
+	while (find_next(*a, (int)size, -1, 0) > 0)
+		op_list(a, b, "ra");
+	while (find_next(*a, (int)size, -1, 0) < 0)
+		op_list(a, b, "rra");
 }

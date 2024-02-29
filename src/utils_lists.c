@@ -6,7 +6,7 @@
 /*   By: lvichi <lvichi@student.42porto.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:21:17 by lvichi            #+#    #+#             */
-/*   Updated: 2024/02/22 23:36:53 by lvichi           ###   ########.fr       */
+/*   Updated: 2024/02/29 15:50:18 by lvichi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int	find_next(t_list *list, int size, int min, int max)
 	i = -1;
 	while (++i < size_list && size)
 	{
-		if (((int)list->r_v == min && (int)(list->prev)->r_v == max)
-			|| (min == -1 && (int)(list->prev)->r_v == max)
-			|| (max == size && (int)list->r_v == min))
+		if (((int)(list->prev)->r_v == min && (int)list->r_v == max)
+			|| (min == -1 && (int)list->r_v == max)
+			|| (max == size && (int)(list->prev)->r_v == min))
 			break ;
 		list = list->next;
 	}
