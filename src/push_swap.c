@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	free_list(b);
 }
 
-long	*ft_nbr_split(char *str)
+static long	*ft_nbr_split(char *str)
 {
 	long	*numbers;
 	ssize_t	i;
