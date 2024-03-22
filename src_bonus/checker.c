@@ -16,7 +16,7 @@ int			main(int argc, char **argv);
 static long	*ft_nbr_split(char *str);
 static long	*ft_split_array(int len, char **array);
 static int	check_input(int len, char **array);
-static void	sort(t_list *a, t_list *b, char **moves_list);
+static void	sort(t_list **a, t_list **b, char **moves_list);
 
 int	main(int argc, char **argv)
 {
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 	else
 		a = init_stack(numbers);
 	if (a)
-		sort(a, b, moves_list);
+		sort(&a, &b, moves_list);
 	free_lists(a, b, numbers, moves_list);
 }
 
@@ -112,14 +112,14 @@ static int	check_input(int len, char **array)
 	return (1);
 }
 
-static void	sort(t_list *a, t_list *b, char **moves_list)
+static void	sort(t_list **a, t_list **b, char **moves_list)
 {
 	int		i;
 	size_t	size;
 
-	size = count_list(a);
+	size = count_list(*a);
 	i = -1;
 	while (moves_list && moves_list[++i])
-		op_list(&a, &b, moves_list[i]);
-	check_sort(a, size);
+		op_list(a, b, moves_list[i]);
+	check_sort(*a, size);
 }
